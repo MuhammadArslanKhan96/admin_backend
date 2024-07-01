@@ -175,7 +175,6 @@ export const signupUser = async (user: {
     }
 
     const newUser = await prisma.users.create({
-      // @ts-ignore
       data: {
         name,
         email: email.toLowerCase(),
@@ -186,7 +185,6 @@ export const signupUser = async (user: {
         address,
         role,
         country,
-        // @ts-ignore
         created_at,
       },
     });

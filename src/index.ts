@@ -16,17 +16,17 @@ import session from "express-session";
 const app = express();
 const port = process.env.PORT ? process.env.PORT : 8000;
 
-// app.use(
-//   session({
-//     secret: "secret",
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       secure: false, // Set to true for production
-//       maxAge: 172800000, // 2 days
-//     },
-//   })
-// );
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: false, // Set to true for production
+      maxAge: 172800000, // 2 days
+    },
+  })
+);
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

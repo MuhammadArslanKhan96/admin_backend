@@ -117,6 +117,7 @@ export const getAllUsers = async (
 export const signupUser = async (req: any, res: express.Response) => {
   try {
     const userWallet = await User.readUserByWallet(req.body.wallet);
+    console.log(userWallet);
     if (!userWallet) {
       const user = await User.signupUser(req.body);
       const token = jwt.sign(
@@ -134,7 +135,7 @@ export const signupUser = async (req: any, res: express.Response) => {
         req.session.regenerate(function (err: any) {
           if (err) return handleError(err, res);
           res.status(201).send({
-            message: "player signed up successfully",
+            message: "User signed up successfully",
             data: { user, token },
           });
         });
@@ -167,7 +168,7 @@ export const signupUser = async (req: any, res: express.Response) => {
 //       );
 
 //       res.status(200).send({
-//         message: "player signed in successfully",
+//         message: "User signed in successfully",
 //         data: { player, token },
 //       });
 //     } else {
@@ -186,13 +187,13 @@ export const signinUser = async (req: any, res: express.Response) => {
     if (user) {
       // Generate JWT token
       const token = jwt.sign(
-        { userId: user.id, email: user.email, role: "player" },
+        { userId: user.id, email: user.email, role: "User" },
         "3650",
         { expiresIn: "30d" }
       );
       tokenJWT = token;
       res.status(200).send({
-        message: "Player signed in successfully",
+        message: "User signed in successfully",
         data: { user, token },
       });
       // req.session.regenerate(function (err: any) {
@@ -204,7 +205,7 @@ export const signinUser = async (req: any, res: express.Response) => {
       //   req.session.save(function (err: any) {
       //     if (err) return handleError(err, res);
       //     res.status(200).send({
-      //       message: "Player signed in successfully",
+      //       message: "User signed in successfully",
       //       data: { user, token },
       //     });
       //   });
