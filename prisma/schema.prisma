@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model collections {
+  id                 Int     @id @default(autoincrement())
+  user_id            Int
+  name               String  @db.Text
+  url                String? @db.Text
+  description        String? @db.Text
+  logo_image         String? @db.Text
+  banner_image       String? @db.Text
+  kind               Json?
+  category           Json?
+  sub_category       Json?
+  collection_address String? @db.Text
+  blockchain         String? @db.Text
+}
+
+model nft {
+  id                 Int     @id @default(autoincrement())
+  name               String  @db.Text
+  description        String  @db.Text
+  royalty_commission Int
+  primary_owner      String  @db.Text
+  secondary_owner    Json?
+  type               String  @db.Text
+  category           String  @db.Text
+  img                String  @db.Text
+  collection_id      Int
+  kind               String  @db.Text
+  properties         Json
+  blockchain         String  @db.Text
+  supply_quantity    Int
+  contact_address    String  @db.Text
+  token_id           String  @db.Text
+  token_standard     String  @db.Text
+  creator_fee        String  @db.Text
+  open_auction       Json?
+  fix_price          Json?
+  mystery_box        Json?
+  level              Int
+  sub_category       String  @db.Text
+  insurance_per_hour Decimal @db.Decimal(10, 0)
+  listingid          String? @db.Text
+  created_at         String? @db.Text
+}
+
+model users {
+  id              Int     @id @default(autoincrement())
+  name            String  @db.Text
+  email           String  @unique(map: "email") @db.VarChar(255)
+  wallet          String  @db.Text
+  contact_details String? @db.Text
+  password        String  @db.Text
+  img             String? @db.Text
+  address         String? @db.Text
+  country         String? @db.Text
+  created_at      String? @db.Text
+  role            String  @db.Text
+}
+
+model nft_transaction {
+  id               Int    @id @default(autoincrement())
+  nfttoken_id      Int
+  nft_id           Int
+  buyer            String @db.Text
+  seller           String @db.Text
+  transaction_hash String @db.Text
+  transaction_time String @db.Text
+  price            Int
+}
+
+model staking {
+  id                 Int                  @id @default(autoincrement())
+  time               String               @db.Text
+  type               String               @db.Text
+  created_by         Int
+  created_at         String?              @db.Text
+  creator_wallet     String               @db.Text
+  staked_at          String             @db.Text
+  staked_user        Int
+  collection_id      Int
+  nft_id             Int
+  stake_transactions stake_transactions[]
+}
+
+model stake_transactions {
+  id            Int      @id @default(autoincrement())
+  stake         staking  @relation(fields: [stake_id], references: [id])
+  stake_id      Int
+  staker_wallet String
+  nft_id        Int
+  collection_id Int
+  amount        String
+  created_at    DateTime @default(now())
+}
