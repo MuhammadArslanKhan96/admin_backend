@@ -68,9 +68,16 @@ export const deleteCollection = async (
 ) => {
   try {
     const deletedCount = await Collection.deleteCollection(
-      parseInt(req.params.id)
+      Number(req.params.id)
     );
-    handleDeleteResponse(res, 0, successMessage, errorMessage);
+
+    console.log(deletedCount);
+    handleDeleteResponse(
+      res,
+      deletedCount as any,
+      successMessage,
+      errorMessage
+    );
   } catch (err) {
     handleError(err, res);
   }

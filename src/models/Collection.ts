@@ -55,7 +55,7 @@ export const deleteCollection = async (id: any) => {
   try {
     const result = await prisma.collections.delete({
       where: {
-        id,
+        id: id,
       },
     });
     return result;

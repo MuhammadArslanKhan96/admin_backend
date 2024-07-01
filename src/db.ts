@@ -36,29 +36,17 @@ createTable(
   "users",
 
   `
-
   id SERIAL PRIMARY KEY,
-
   name TEXT NOT NULL,
-
-  email VARCHAR(255) NOT NULL UNIQUE MAP email,
-
+  email VARCHAR(255) NOT NULL UNIQUE,
   wallet TEXT NOT NULL,
-
   contact_details TEXT NULL,
-
   password TEXT NOT NULL,
-
   img TEXT DEFAULT NULL,
-
   address TEXT DEFAULT NULL,
-
   country TEXT DEFAULT NULL,
-
   created_at TEXT DEFAULT NULL,
-
   role TEXT NOT NULL
-
   `
 );
 
@@ -66,31 +54,18 @@ createTable(
   "collections",
 
   `
-
   id SERIAL PRIMARY KEY,
-
   user_id INTEGER NOT NULL REFERENCES users(id),
-
   name TEXT NOT NULL,
-
   url TEXT,
-
   description TEXT,
-
   logo_image TEXT,
-
   banner_image TEXT,
-
   kind JSON,
-
   category JSON,
-
   sub_category JSON,
-
   collection_address TEXT DEFAULT NULL,
-
   blockchain TEXT
-
   `
 );
 

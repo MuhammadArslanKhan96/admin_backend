@@ -193,6 +193,7 @@ export const signupUser = async (user: {
     throw err;
   }
 };
+
 export const signinUser = async (email: string, password: string) => {
   try {
     const player = await prisma.users.findFirst({

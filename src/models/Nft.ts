@@ -14,7 +14,7 @@ export const createNft = async (nft: any) => {
 
 export const readNft = async (id: number) => {
   try {
-    const result = await prisma.nft.findUnique({ where: { id } });
+    const result = await prisma.nft.findFirst({ where: { id } });
     return result;
   } catch (err) {
     const error = err as Error;
